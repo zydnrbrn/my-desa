@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:latest
 
 WORKDIR /frontend
 
@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3000
 
-CMD npm startbrew
+CMD npm start
