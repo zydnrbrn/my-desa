@@ -1,0 +1,28 @@
+version: '3'
+services:
+    mysql:
+        image: mysql:latest
+        ports:
+            - 3306:3305
+        environment:
+            - MYSQL_USER=root
+            - MYSQL_PASSWORD=rahasia
+            - MYSQL_DB=db_desa
+        volumes:
+            - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    backend-app:
+        build: ./backend
+        ports:
+            - 8080:8080
+        environment:
+            - DB_USER=root
+            - DB_PASSWORD=rahasia
+            - DB_HOST=mysql
+            - DB_PORT=3306
+            - DB_DATABASE=db_desa
+        depends_on:
+            - mysql
+    frontend-app:
+        build: ./frontend
+        ports:
+            - 8081:8080
